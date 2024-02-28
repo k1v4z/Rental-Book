@@ -1,0 +1,23 @@
+.category-list{
+    margin-top: 100px;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: 1fr 1fr 1fr 1fr ;
+    gap: 15px;
+    column-gap: 15px;
+}
+.type{
+    background-color: #e6b789;
+    color: #fff;
+    border: none;
+    padding: 15px 15px;
+    margin: 5px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.type:hover{
+    margin: 15px 15px;
+    color: #a19e9e;
+}
