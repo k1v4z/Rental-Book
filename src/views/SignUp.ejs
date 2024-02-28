@@ -1,0 +1,37 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="/css/signup.css">
+</head>
+
+<body>
+    <div class="signup-container">
+        <h1>Sign Up</h1>
+        <form action="">
+            <label for="username">UserName</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="role">Role</label>
+
+            <select name="role" id="role">
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+            </select>
+            <input class="sign-up" type="submit" value="Sign Up">
+        </form>
+        <div class="term-container">
+            <input class="checkbox" type="checkbox">
+            <p class="terms">By signing up, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy
+                    Policy</a>.
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>
