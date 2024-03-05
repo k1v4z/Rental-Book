@@ -35,7 +35,12 @@ body {
     font-size: 24px;
     color: #fff;
 }
-
+.cart-icon{
+    width: 50px;
+    height: 30px;
+    margin-right: 10px;
+    cursor: pointer;
+}
 .middle {
     margin-left: 100px;
     display: flex;
@@ -44,7 +49,7 @@ body {
 }
 
 input[type="search-bar"] {
-    width: 100%;
+    width: 85%;
     padding: 10px;
     border: none;
     border-top-left-radius: 5px;
@@ -112,8 +117,39 @@ input[type="search-bar"] {
     font-family: 'Elianto', sans-serif;
     font-weight: 400;
 }
+.btn-logout {
+    background-color: #ff5a5f;
+    color: #fff;
+    padding: 10px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    margin-left: 15px;
+    font-weight: bold;
+}
 
-/* Responsive styles for smaller screens */
+.btn-logout:hover{
+    padding: 11px 11px;
+}
+
+.btn-logout span {
+    margin-right: 5px; 
+}
+
+.username{
+    color: #0707f0;
+    text-decoration: underline;
+}
+
+.logout-icon {
+    width: 18px; 
+    height: 18px; 
+    vertical-align: middle;
+}
+
+/* Responsive */
 @media screen and (max-width: 768px) {
     .header-container {
         flex-direction: column;

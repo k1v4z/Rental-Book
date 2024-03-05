@@ -1,0 +1,78 @@
+body {
+  font-family: Arial, sans-serif;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+.cart-container {
+  max-width: 600px;
+  margin-top: 100px;
+  margin: 100px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.info-each-book {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+}
+
+.imgproduct {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.information {
+  flex-grow: 1;
+}
+
+.date {
+  margin-top: 5px;
+  padding: 5px;
+}
+.btn-delete{
+    margin-left: 10px;
+}
+.btn-delete,
+.btn-purchase {
+  background-color: #e74c3c;
+  color: #fff;
+  padding: 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-purchase {
+  background-color: #3498db;
+  margin-top: 10px;
+  margin-left: auto;
+}
+
+.btn-delete:hover,
+.btn-purchase:hover {
+  background-color: #c0392b;
+}
+
+.btn-purchase:hover {
+  background-color: #2980b9;
+}
+.namebook {
+  font-weight: bold;
+}
+
+.author {
+  font-style: italic;
+}
+.price{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}

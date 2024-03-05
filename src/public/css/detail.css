@@ -1,0 +1,44 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+.detail-container {
+  max-width: 600px;
+  margin: 20px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.book-image img {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.book-info {
+  margin-top: 20px;
+}
+
+.title {
+  color: #333;
+}
+
+.author {
+  font-style: italic;
+  margin-top: 10px;
+}
+
+.description {
+  margin-top: 10px;
+}
+
+.price {
+  font-weight: bold;
+  margin-top: 10px;
+}
