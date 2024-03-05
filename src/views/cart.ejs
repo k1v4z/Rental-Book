@@ -1,16 +1,14 @@
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Categories</title>
+    <title>Cart</title>
+    <link rel="stylesheet" href="/css/header.css">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
     <link href="https://fonts.cdnfonts.com/css/bavro" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/elianto" rel="stylesheet">
-    <link rel="stylesheet" href="/css/header.css">
-    <link rel="stylesheet" href="/css/footer.css">
-    <link rel="stylesheet" href="/css/category.css">
+    <link rel="stylesheet" href="/css/cart.css">
 </head>
 
 <body>
@@ -28,7 +26,8 @@
             </button>
         </div>
         <div class="right">
-            <div onclick="window.location.href = '/category'" class="category">Category Book</div>
+            <div onclick="window.location.href = '/category'" class="category">Category</div>
+            <img onclick="window.location.href = '/cart'" class="cart-icon" src="/icon/cart-icon.png" alt="">
             <% if(userData.username===undefined){ %>
                 <button onclick="window.location.href = '/signup'" class="btn-signup">Sign Up</button>
                 <button onclick="window.location.href = '/login'" class="btn-login">Login</button>
@@ -41,37 +40,34 @@
                         <img src="/icon/logout-icon.png" alt="Logout" class="logout-icon">
                     </button>
                     <%}%>
-
         </div>
     </div>
-
-    <div class="category-list">
-        <button class="type">Novel</button>
-        <button class="type">Horror</button>
-        <button class="type">Horror</button>
-        <button class="type">Horror</button>
-        <button class="type">Horror</button>
-        <button class="type">Horror</button>
-        <button class="type">Novel</button>
-        <button class="type">Horror</button>
-        <button class="type">Horror</button>
-        <button class="type">Horror</button>
-        <button class="type">Horror</button>
-        <button class="type">Horror</button>
-        <button class="type">Novel</button>
-        <button class="type">Horror</button>
-        <button class="type">Horror</button>
-        <button class="type">Horror</button>
-        <button class="type">Horror</button>
-        <button class="type">Horror</button>
-        <button class="type">Novel</button>
-        <button class="type">Horror</button>
-        <button class="type">Horror</button>
-        <button class="type">Horror</button>
-        <button class="type">Horror</button>
-        <button class="type">Horror</button>
+    <div class="cart-container">
+        <div class="info-each-book">
+            <img class="imgproduct" src="/product/product1.png" alt="">
+            <div class="information">
+                <div class="namebook">Tuổi trẻ đáng giá bao nhiêu</div>
+                <div class="author">Rossie Nguyen</div>
+                <label for="date">Return date</label>
+                <input class="date" type="date">
+            </div>
+            <div>Fee: 13.000đ</div>
+            <button class="btn-delete">Delete</button>
+        </div>
+        <div class="info-each-book">
+            <img class="imgproduct" src="/product/product1.png" alt="">
+            <div class="information">
+                <div class="namebook">Tuổi trẻ đáng giá bao nhiêu</div>
+                <div class="author">Rossie Nguyen</div>
+                <label for="date">Return date</label>
+                <input class="date" type="date">
+            </div>
+            <div>Fee: 13.000đ</div>
+            <button class="btn-delete">Delete</button>
+        </div>
+        <div>Total: <span class="price">26.000đ</span> <span class="fee-i-late">(Not late)</span></div>
+        <button class="btn-purchase">Purchase</button>
     </div>
-
 </body>
 
 </html>

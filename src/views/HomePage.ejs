@@ -27,13 +27,25 @@
             </button>
         </div>
         <div class="right">
-            <div onclick="window.location.href = '/category'" class="category">Category Book</div>
-            <button onclick="window.location.href = '/signup'" class="btn-signup">Sign Up</button>
-            <button onclick="window.location.href = '/login'" class="btn-login">Login</button>
+            <div onclick="window.location.href = '/category'" class="category">Category</div>
+            <img onclick="window.location.href = '/cart'" class="cart-icon" src="/icon/cart-icon.png" alt="">
+            <% if(userData.username===undefined){ %>
+                <button onclick="window.location.href = '/signup'" class="btn-signup">Sign Up</button>
+                <button onclick="window.location.href = '/login'" class="btn-login">Login</button>
+                <%} else {%>
+                    <span class="username">
+                        <%= userData.username %>
+                    </span>
+                    <button id="btnLogout" onclick="window.location.href = '/logout'" class="btn-logout">
+                        <span class="logout-span">Logout</span>
+                        <img src="/icon/logout-icon.png" alt="Logout" class="logout-icon">
+                    </button>
+                    <%}%>
         </div>
     </div>
+
     <div class="product-grid">
-        <div class="product-container">
+        <div onclick="window.location.href = '/details/book'" class="product-container">
             <img class="book-image" src="/product/product1.png" alt="">
             <div class="book-name">Tuổi trẻ đáng giá bao nhiêu</div>
             <div class="author">Rosie Nguyen</div>

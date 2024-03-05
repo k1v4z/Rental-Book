@@ -10,7 +10,7 @@
 <body>
     <div class="signup-container">
         <h1>Sign Up</h1>
-        <form action="">
+        <div class="form">
             <label for="username">UserName</label>
             <input type="text" id="username" name="username" required>
 
@@ -19,19 +19,24 @@
 
             <label for="role">Role</label>
 
-            <select name="role" id="role">
-                <option value="user">User</option>
+            <select name="role" id="role" onchange="getSelectedValue()">
+                <option value="user" selected="true">User</option>
                 <option value="admin">Admin</option>
             </select>
-            <input class="sign-up" type="submit" value="Sign Up">
-        </form>
-        <div class="term-container">
-            <input class="checkbox" type="checkbox">
-            <p class="terms">By signing up, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy
-                    Policy</a>.
-            </p>
+            <div class="login-success login-fail hidden" id="statusMessage">Login Successful</div>
+            <input onclick="signUp();" class="sign-up" type="submit" value="Sign Up">
+            <div>
+                <div class="term-container">
+                    <input class="checkbox" type="checkbox">
+                    <p class="terms">By signing up, you agree to our <a href="#">Terms of Service</a> and <a
+                            href="#">Privacy
+                            Policy</a>.
+                    </p>
+                </div>
+            </div>
+
         </div>
-    </div>
+        <script src="/js/signup.js"></script>
 </body>
 
 </html>

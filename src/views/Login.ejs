@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
-    <link rel="stylesheet" href="/css/signup.css">
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/login.css">
 </head>
 
 <body>
-    <div class="signup-container">
+    <div class="login-container">
         <h1>Login</h1>
-        <form action="">
+        <form action="/login" method="POST">
             <label for="username">UserName</label>
             <input type="text" id="username" name="username" required>
 
             <label for="password">Password</label>
             <input type="password" id="password" name="password" required>
+            <div class="login-success login-fail hidden" id="statusMessage">Login Successful</div>
 
-            <input class="sign-up" type="submit" value="Login">
+            <input class="sign-up" onclick="login();" type="submit" value="Login">
         </form>
-    </div>
 </body>
 
 </html>
