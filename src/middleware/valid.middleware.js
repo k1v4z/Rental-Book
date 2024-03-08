@@ -1,5 +1,5 @@
 const checkValid = (req, res, next) => {
-    const { username, password } = req.body;
+    const { username, passwords } = req.body;
 
     console.log(username);
 
@@ -11,7 +11,7 @@ const checkValid = (req, res, next) => {
         });
     }
 
-    if (password.length < 6) {
+    if (passwords.length < 6) {
         return res.status(409).json({
             status: 409,
             message: 'password must have more than 6 characters'
