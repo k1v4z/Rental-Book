@@ -33,20 +33,24 @@
                 <button onclick="window.location.href = '/signup'" class="btn-signup">Sign Up</button>
                 <button onclick="window.location.href = '/login'" class="btn-login">Login</button>
                 <%} else {%>
-                    <span class="username">
-                        <%= userData.username %>
-                    </span>
-                    <button id="btnLogout" onclick="window.location.href = '/logout'" class="btn-logout">
-                        <span class="logout-span">Logout</span>
-                        <img src="/icon/logout-icon.png" alt="Logout" class="logout-icon">
-                    </button>
-                    <%}%>
+                    <% if(userData.roles==='admin' ) {%>
+                        <!-- admin don't need to use cart -->
+                        <script>document.querySelector('.cart-icon').style.display = "none"</script>
+                        <%}%>
+                            <span class="username" onclick="window.location.href = '/personal'">
+                                <%= userData.username %>
+                            </span>
+                            <button id="btnLogout" onclick="window.location.href = '/logout'" class="btn-logout">
+                                <span class="logout-span">Logout</span>
+                                <img src="/icon/logout-icon.png" alt="Logout" class="logout-icon">
+                            </button>
+                            <%}%>
         </div>
     </div>
 
     <div class="product-grid">
-        <div onclick="window.location.href = '/details/book'" class="product-container">
-            <img class="book-image" src="/product/product1.png" alt="">
+        <div class="product-container">
+            <img class="book-image" src="/product/product1.png" onclick="window.location.href = '/details/book'" alt="">
             <div class="book-name">Tuổi trẻ đáng giá bao nhiêu</div>
             <div class="author">Rosie Nguyen</div>
             <div class="price">130.000đ</div>

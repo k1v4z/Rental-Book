@@ -32,7 +32,7 @@
                 <button onclick="window.location.href = '/signup'" class="btn-signup">Sign Up</button>
                 <button onclick="window.location.href = '/login'" class="btn-login">Login</button>
                 <%} else {%>
-                    <span class="username">
+                    <span class="username" onclick="window.location.href = '/personal'">
                         <%= userData.username %>
                     </span>
                     <button id="btnLogout" onclick="window.location.href = '/logout'" class="btn-logout">

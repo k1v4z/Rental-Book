@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/personal.css">
+    <title>Personal</title>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <header>
+            <h1> Hello <span>
+                    <%= userData.username %>
+                </span></h1>
+        </header>
+        <nav>
+            <ul>
+                <div class="selection">
+                    <img class="img-icon" src="/icon/addbook.png">
+                    <li><a href="/addbook">Add book</a></li>
+                </div>
+                <div class="selection">
+                    <img class="img-icon" src="/icon/listbook.png">
+                    <% if(userData.roles==='admin' ) {%>
+                        <li><a href="/listbook/2">Manage Account</a></li>
+                        <%} else {%>
+                            <li><a href="/listbook/2">List book rented</a></li>
+                            <%}%>
+                </div>
+                <div class="selection" onclick="window.location.href='/settings'">
+                    <img class="img-icon" src="/icon/setting.png">
+                    <li><a href="/setting">Settings</a></li>
+                </div>
+                <div class="selection">
+                    <img class="img-icon" src="/icon/inventory.png">
+                    <li><a href="/inventory">Inventory</a></li>
+                </div>
+                <div class="selection">
+                    <img class="img-icon" src="/icon/leave.png">
+                    <li><a href="/">Back</a></li>
+                </div>
+            </ul>
+        </nav>
+        <main class="content">
+            <section class="overview1">
+                <p>Welcome to the dashboard!</p>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>
