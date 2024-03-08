@@ -27,6 +27,14 @@ const apigetIdUser = async (req, res) => {
     })
 }
 
+const apiCheckPermission = (req, res) => {
+    const role = req.params.role;
+
+    return res.status(200).json({
+        role: role
+    })
+}
+
 module.exports = {
-    apisignup, apilogin, apigetIdUser
+    apisignup, apilogin, apigetIdUser, apiCheckPermission
 }

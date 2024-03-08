@@ -11,9 +11,10 @@ const getHomePage = (req, res) => {
 }
 
 const postLogin = async (req, res) => {
-    const { username, password } = req.body;
+    const { username, passwords } = req.body;
 
-    const user = await authen(username, password);
+    const user = await authen(username, passwords);
+
     if (user.username === undefined) {
         res.send('Username or passsword is incorrect');
     } else {
@@ -40,6 +41,7 @@ const getSignUpForm = (req, res) => {
     if (userData) {
         res.send('You are already logged in');
     }
+
     return res.render('SignUp.ejs');
 }
 
