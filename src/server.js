@@ -16,7 +16,7 @@ app.use(cookieParser());
 
 //config view engine
 setViewEngine(app);
-//initApiRoute(app);
+initApiRoute(app);
 
 //config req.body
 app.use(bodyParser.json());
