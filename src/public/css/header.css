@@ -141,6 +141,7 @@ input[type="search-bar"] {
 .username{
     color: #0707f0;
     text-decoration: underline;
+    cursor: pointer;
 }
 
 .logout-icon {

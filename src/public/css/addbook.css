@@ -1,0 +1,56 @@
+.content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        form {
+            width: 80%;
+            max-width: 400px;
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        nav ul {
+    list-style-type: none;
+    padding: 0;
+    
+}
+nav {
+    background-color: #07121d;
+    color: #ececf1;
+    position: relative;
+    top: 49px;
+    bottom: 0;
+    transition: background-color 0.3s ease;
+    position: fixed;
+    z-index: 100; 
+}
+.overview {
+    animation: fadeIn 1s ease;
+    position: relative;
+    left: 500px;
+}
+.form-add-book{
+    width: 150%;
+}
