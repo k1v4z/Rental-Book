@@ -1,5 +1,5 @@
 const express = require('express');
-const { apisignup, apilogin, apigetIdUser } = require('../controller/ApiController');
+const { apisignup, apilogin, apigetIdUser, apiCheckPermission } = require('../controller/ApiController');
 
 const { checkValid } = require('../middleware/valid.middleware');
 
@@ -10,6 +10,7 @@ const initApiRoute = (app) => {
     router.post('/login', checkValid, apilogin);
 
     router.get('/getiduser', apigetIdUser);
+    router.get('/checkpermission/:role', apiCheckPermission);
 
     return app.use('/api/v1/', router);
 }
