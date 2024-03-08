@@ -1,4 +1,5 @@
 const User = require('../model/User');
+const Book = require('../model/Book')
 
 const checkUserExist = async (username) => {
 
@@ -65,6 +66,21 @@ const getIdUser = async (req) => {
     };
 }
 
+const addBook = async () => {
+    const book = await Book.create({
+        name: '',
+        author: '',
+        description: '',
+        price: 122222,
+        image: '',
+        idcategory: 1,
+        isdeleted: false,
+        quantity: 1
+    });
+
+    console.log(book);
+}
+
 module.exports = {
-    signUp, login, getIdUser
+    signUp, login, getIdUser, addBook
 }
