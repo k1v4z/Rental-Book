@@ -33,14 +33,20 @@
                     <img class="img-icon" src="/icon/setting.png">
                     <li><a href="/setting">Settings</a></li>
                 </div>
-                <div class="selection">
-                    <img class="img-icon" src="/icon/inventory.png">
-                    <li><a href="/inventory">Inventory</a></li>
-                </div>
-                <div class="selection">
-                    <img class="img-icon" src="/icon/leave.png">
-                    <li><a href="/">Back</a></li>
-                </div>
+                <% if(userData.roles==='admin' ) {%>
+                    <div class="selection">
+                        <img class="img-icon" src="/icon/category.png">
+                        <li><a href="/manage-category">Category</a></li>
+                    </div>
+                    <%}%>
+                        <div class="selection">
+                            <img class="img-icon" src="/icon/inventory.png">
+                            <li><a href="/inventory">Inventory</a></li>
+                        </div>
+                        <div class="selection">
+                            <img class="img-icon" src="/icon/leave.png">
+                            <li><a href="/">Back</a></li>
+                        </div>
             </ul>
         </nav>
         <main class="content">
