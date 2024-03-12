@@ -6,7 +6,7 @@ const checkCPAmiddleware = {
 
     checkcookie: (req, res, next) => {
         let userData = req.cookies.userData;
-
+        
         if (userData === undefined) {
             res.redirect('/login');
         } else {
