@@ -1,5 +1,6 @@
 const User = require('../model/User');
-const Book = require('../model/Book')
+const Book = require('../model/Book');
+const Category = require('../model/Category');
 
 const checkUserExist = async (username) => {
 
@@ -217,8 +218,52 @@ const getBookInfor = async (id) => {
     return book;
 }
 
+const getListCategory = async () => {
+    const categories = await Category.findAll();
+    return categories;
+}
+
+const getAllUsers = () => {
+
+}
+
+const getDetail = async (id) => {
+    const book = await Book.findOne({
+        where: {
+            bookId: Number(id)
+        }
+    });
+
+    return book.dataValues;
+}
+
+const addCategory = async (name) => {
+    let message = '';
+    await Category.findOrCreate({
+        where: {
+            name: name.trim() //check name have exist in database
+        },
+        defaults: { // set the default properties if it doesn't exist
+            name: name.trim()
+        }
+    }).then(function (result) {
+        var created = result[1]; // boolean stating if it was created or not
+
+        if (!created) { // false if this category already exists and was not created.
+            message = 'This category already exists';
+        } else {
+            message = 'Add succesful';
+        }
+    }).catch(function (err) {
+        console.log(err); //catch error avoid crash app
+    });
+
+    return message;
+}
+
 module.exports = {
     signUp, login, getIdUser, addBook, getBookInventory,
     increaseQuantityBook, decreaseQuantityBook, deleteBook,
-    getBookInfor, updateBookInformation
+    getBookInfor, updateBookInformation, getListCategory, addCategory,
+    getAllUsers, getDetail
 }
