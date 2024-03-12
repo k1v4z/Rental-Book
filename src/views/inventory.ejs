@@ -48,59 +48,33 @@
             <section class="overview">
                 <h2>Inventory</h2>
                 <ul class="inventorylist" id="inventoryList">
-                    <li class="book-item">
-                        <img class="book-image" src="/product/product1.png" alt="Book Image">
-                        <div class="book-details">
-                            <h3>Book Title 1</h3>
-                            <p>Id: 1</p>
-                            <p>Author: Author 1</p>
-                            <p>Amount: 1</p>
-                            <p class="book-price">Price: $10.00</p>
-                        </div>
-                        <button class="add-button">Add</button>
-                        <button class="delete-button">Delete</button>
-                    </li>
-                    <li class="book-item">
-                        <img class="book-image" src="/product/product1.png" alt="Book Image">
-                        <div class="book-details">
-                            <h3>Book Title 2</h3>
-                            <p>Id: 1</p>
-                            <p>Author: Author 2</p>
-                            <p>Amount: 1</p>
-                            <p class="book-price">Price: $12.50</p>
-                        </div>
-                        <button class="add-button">Add</button>
-                        <button class="delete-button">Delete</button>
-                    </li>
-                    <li class="book-item">
-                        <img class="book-image" src="/product/product1.png" alt="Book Image">
-                        <div class="book-details">
-                            <h3>Book Title 2</h3>
-                            <p>Id: 1</p>
-                            <p>Author: Author 2</p>
-                            <p>Amount: 1</p>
-                            <p class="book-price">Price: $12.50</p>
-                        </div>
-                        <button class="add-button">Add</button>
-                        <button class="delete-button">Delete</button>
-                    </li>
-                    <li class="book-item">
-                        <img class="book-image" src="/product/product1.png" alt="Book Image">
-                        <div class="book-details">
-                            <h3>Book Title 2</h3>
-                            <p>Id: 1</p>
-                            <p>Author: Author 2</p>
-                            <p>Amount: 1</p>
-                            <p class="book-price">Price: $12.50</p>
-                        </div>
-                        <button class="add-button">Add</button>
-                        <button class="delete-button">Delete</button>
-                    </li>
+                    <% book.forEach((Books)=>{%>
+                        <li class="book-item">
+                            <img class="book-image" src="/product/<%= Books.image%>" alt="Book Image">
+                            <div class="book-details">
+                                <p>Id: <%= Books.bookId %>
+                                </p>
+                                <h3>
+                                    <%= Books.name %>
+                                </h3>
+                                <p>Author: <%= Books.author %>
+                                </p>
+                                <p>Amount: <%= Books.quantity %> <button class="btn-subtract"
+                                            data-bookId="<%= Books.bookId %>">-</button>
+                                </p>
+                                <p class="book-price">Price: <%= Books.price %> VND</p>
+                            </div>
+                            <button class="add-button" data-bookId="<%= Books.bookId %>">Add</button>
+                            <button class="edit-button"
+                                onclick="window.location.href='/edit/<%= Books.bookId%>'">Edit</button>
+                            <button class="delete-button" data-bookId="<%= Books.bookId %>">Delete</button>
+                        </li>
+                        <%}) %>
                 </ul>
             </section>
         </main>
     </div>
-
+    <script src="/js/handleBook.js"></script>
 </body>
 
 </html>
