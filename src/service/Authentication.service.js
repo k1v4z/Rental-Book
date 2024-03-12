@@ -1,6 +1,5 @@
 const User = require("../model/User")
 
-
 //check user have exist
 const authen = async (username, password) => {
     const user = await User.findOne({
