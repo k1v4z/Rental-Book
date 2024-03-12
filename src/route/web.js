@@ -5,7 +5,7 @@ const { getHomePage, getSignUpForm, getLoginForm, getListCategory,
 const { checkValid } = require('../middleware/valid.middleware');
 const { checkCookie } = require('../middleware/cookie.middleware');
 const checkCPAmiddleware = require('../middleware/cap.middleware');
-const { personal, getFormAddBook, getInventory, getSettingForm, getListBookRented, addNewBook, getEditForm, updateBook } = require('../controller/PersonalController');
+const { personal, getFormAddBook, getInventory, getSettingForm, getListBookRented, addNewBook, getEditForm, updateBook, category, addNewCategory } = require('../controller/PersonalController');
 const router = express.Router();
 const { upload } = require('../config/multer');
 const { increaseQuantityBook } = require('../service/CRUD.Service');
@@ -17,7 +17,7 @@ router.get('/signup', getSignUpForm);
 router.get('/login', getLoginForm);
 router.get('/category', getListCategory);
 router.get('/cart', checkCookie, getCartForm);
-router.get('/details/book', getDetailBook);
+router.get('/details/book/:id', getDetailBook);
 
 router.post('/login', checkValid, postLogin);
 router.get('/logout', checkCookie, logout);
@@ -35,5 +35,8 @@ checkCPAmiddleware.checkpermission, upload.single('book-pic')], addNewBook);
 router.post('/update-book', upload.single('book-pic'), updateBook);
 router.get('/edit/:id', [checkCPAmiddleware.checkcookie,
 checkCPAmiddleware.checkpermission], getEditForm);
+router.get('/manage-category', [checkCPAmiddleware.checkcookie,
+checkCPAmiddleware.checkpermission], category);
+router.post('/addnewcategory', addNewCategory)
 
 module.exports = router;
