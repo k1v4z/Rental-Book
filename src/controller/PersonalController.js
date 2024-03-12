@@ -1,4 +1,4 @@
-const { addBook, getBookInventory, getBookInfor, updateBookInformation } = require("../service/CRUD.Service");
+const { addBook, getBookInventory, getBookInfor, updateBookInformation, getListCategory, addCategory } = require("../service/CRUD.Service");
 
 const personal = (req, res) => {
 
@@ -33,8 +33,19 @@ const getEditForm = async (req, res) => {
     });
 }
 
+const category = async (req, res) => {
+    const categories = await getListCategory();
+
+    return res.render('managecategory.ejs', {
+        userData: getUserData(req),
+        listcategory: categories
+    });
+}
+
 const getListBookRented = (req, res) => {
-    return res.render('listbookrented.ejs', { userData: getUserData(req) });
+    return res.render('listbookrented.ejs', {
+        userData: getUserData(req)
+    });
 }
 
 const getUserData = (req) => {
@@ -47,6 +58,10 @@ const getUserData = (req) => {
     return JSON.parse(userData);
 }
 
+const getAllUser = (req, res) => {
+    
+}
+
 const addNewBook = async (req, res) => {
     if (req.fileValidationError) {
         return res.send(req.fileValidationError);
@@ -57,6 +72,13 @@ const addNewBook = async (req, res) => {
     addBook(req);
 
     res.send('Add book succesful');
+}
+
+const addNewCategory = async (req, res) => {
+    const { categoryName } = req.body;
+
+    const message = await addCategory(categoryName);
+    res.send(message);
 }
 
 const updateBook = async (req, res) => {
@@ -76,5 +98,6 @@ const updateBook = async (req, res) => {
 
 module.exports = {
     personal, getInventory, getFormAddBook, getSettingForm,
-    getListBookRented, addNewBook, getEditForm, updateBook
+    getListBookRented, addNewBook, getEditForm, updateBook,
+    category, addNewCategory
 }
