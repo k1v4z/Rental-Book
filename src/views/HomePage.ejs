@@ -52,7 +52,7 @@
         <% book.forEach((Books)=>{%>
             <div class="product-container">
                 <img class="book-image" src="/product/<%= Books.image%>"
-                    onclick="window.location.href = '/details/book'" alt="">
+                    onclick="window.location.href = '/details/book/<%= Books.bookId%>'" alt="">
                 <div class="book-name">
                     <%= Books.name%>
                 </div>

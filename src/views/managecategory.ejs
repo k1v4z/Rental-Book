@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/personal.css">
+    <link rel="stylesheet" href="/css/addbook.css">
+    <title>Personal</title>
+    <style>
+        #customers {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #customers td,
+        #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #customers tr:hover {
+            background-color: #ddd;
+        }
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <header>
+            <h1> Hello <span>
+                    <%= userData.username %>
+                </span></h1>
+        </header>
+        <nav>
+            <ul>
+                <div class="selection">
+                    <img class="img-icon" src="/icon/addbook.png">
+                    <li><a href="/addbook">Add book</a></li>
+                </div>
+                <div class="selection">
+                    <img class="img-icon" src="/icon/listbook.png">
+                    <% if(userData.roles==='admin' ) {%>
+                        <li><a href="/listbook/2">Manage Account</a></li>
+                        <%} else {%>
+                            <li><a href="/listbook/2">List book rented</a></li>
+                            <%}%>
+                </div>
+                <div class="selection">
+                    <img class="img-icon" src="/icon/setting.png">
+                    <li><a href="/setting">Settings</a></li>
+                </div>
+                <% if(userData.roles==='admin' ) {%>
+                    <div class="selection" style="background-color: #2c3e50;">
+                        <img class="img-icon" src="/icon/category.png">
+                        <li><a href="/manage-category">Category</a></li>
+                    </div>
+                    <%}%>
+                        <div class="selection">
+                            <img class="img-icon" src="/icon/inventory.png">
+                            <li><a href="/inventory">Inventory</a></li>
+                        </div>
+                        <div class="selection">
+                            <img class="img-icon" src="/icon/leave.png">
+                            <li><a href="/">Back</a></li>
+                        </div>
+            </ul>
+        </nav>
+        <main class="content">
+            <section class="overview">
+                <% if(listcategory.length==0){ %>
+                    <p>You don't add any category yet</p>
+                    <%} else {%>
+                        <table id="customers">
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                            </tr>
+                            <% listcategory.forEach((category)=>{ %>
+                                <tr>
+                                    <td>
+                                        <%= category.idcategory%>
+                                    </td>
+                                    <td>
+                                        <%= category.name%>
+                                    </td>
+                                </tr>
+                                <%})%>
+                        </table>
+                        <%}%>
+
+                            <form class="form-add-book" id="addCategoryForm" action="/addnewcategory" method="POST">
+                                <label for="categoryName">Category Name:</label>
+                                <input type="text" id="categoryName" name="categoryName" required>
+
+                                <button type="submit">Add Category</button>
+                            </form>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>

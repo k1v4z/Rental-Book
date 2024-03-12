@@ -10,16 +10,20 @@
 <body>
     <div class="detail-container">
         <div class="book-image">
-            <img src="/product/product1.png" alt="Book Cover">
+            <img src="/product/<%= bookdetail.image%>" alt="Book Cover">
         </div>
         <div class="book-info">
-            <h2 class="title">Tuổi trẻ đáng giá bao nhiêu</h2>
-            <p class="author">Author: Rossie Nguyen</p>
-            <p class="description">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor,
-                dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam.
+            <h2 class="title">
+                <%= bookdetail.name%>
+            </h2>
+            <p class="author">
+                <%= bookdetail.author%>
             </p>
-            <p class="price">Price: 13.000đ</p>
+            <p class="description">
+                <%= bookdetail.description %>
+            </p>
+            <p class="price">Price: <%= bookdetail.price %>
+            </p>
         </div>
     </div>
 </body>
