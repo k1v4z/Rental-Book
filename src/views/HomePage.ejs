@@ -49,20 +49,22 @@
     </div>
 
     <div class="product-grid">
-        <div class="product-container">
-            <img class="book-image" src="/product/product1.png" onclick="window.location.href = '/details/book'" alt="">
-            <div class="book-name">Tuổi trẻ đáng giá bao nhiêu</div>
-            <div class="author">Rosie Nguyen</div>
-            <div class="price">130.000đ</div>
-            <button class="btn-rent">RENT</button>
-        </div>
-        <div class="product-container">
-            <img class="book-image" src="/product/product1.png" alt="">
-            <div class="book-name">Tuổi trẻ đáng giá bao nhiêu </div>
-            <div class="author">Rosie Nguyen</div>
-            <div class="price">130.000đ</div>
-            <button onclick="window.location.href = '/book/detail'" class="btn-rent">RENT</button>
-        </div>
+        <% book.forEach((Books)=>{%>
+            <div class="product-container">
+                <img class="book-image" src="/product/<%= Books.image%>"
+                    onclick="window.location.href = '/details/book'" alt="">
+                <div class="book-name">
+                    <%= Books.name%>
+                </div>
+                <div class="author">
+                    <%= Books.author%>
+                </div>
+                <div class="price">
+                    <%= Books.price%> VND
+                </div>
+                <button class="btn-rent">RENT</button>
+            </div>
+            <%})%>
     </div>
     <footer class="footer-container">
         <div class="footer-content">
