@@ -1,4 +1,4 @@
-const { getBookInventory } = require("../service/CRUD.Service");
+const { getBookInventory, getDetail } = require("../service/CRUD.Service");
 const { authen } = require("../service/authentication.service");
 
 const getHomePage = async (req, res) => {
@@ -81,8 +81,13 @@ const getCartForm = (req, res) => {
     return res.render('cart.ejs', { userData: JSON.parse(userData) });
 }
 
-const getDetailBook = (req, res) => {
-    return res.render('detail.ejs');
+const getDetailBook = async (req, res) => {
+    const bookId = req.params.id;
+    const book = await getDetail(bookId);
+
+    return res.render('detail.ejs',{
+        bookdetail: book
+    });
 }
 
 module.exports = {
