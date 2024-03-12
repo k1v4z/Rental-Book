@@ -5,12 +5,13 @@ const { getHomePage, getSignUpForm, getLoginForm, getListCategory,
 const { checkValid } = require('../middleware/valid.middleware');
 const { checkCookie } = require('../middleware/cookie.middleware');
 const checkCPAmiddleware = require('../middleware/cap.middleware');
-const { personal, getFormAddBook, getInventory, getSettingForm, getListBookRented, addNewBook } = require('../controller/PersonalController');
+const { personal, getFormAddBook, getInventory, getSettingForm, getListBookRented, addNewBook, getEditForm, updateBook } = require('../controller/PersonalController');
 const router = express.Router();
 const { upload } = require('../config/multer');
+const { increaseQuantityBook } = require('../service/CRUD.Service');
 
 router.use(cookieParser());
-
+//Homepage route
 router.get('/', getHomePage);
 router.get('/signup', getSignUpForm);
 router.get('/login', getLoginForm);
@@ -30,5 +31,9 @@ router.get('/setting', checkCookie, getSettingForm);
 router.get('/listbook/:id', checkCookie, getListBookRented);
 router.post('/addnewbook', [checkCPAmiddleware.checkcookie,
 checkCPAmiddleware.checkpermission, upload.single('book-pic')], addNewBook);
+
+router.post('/update-book', upload.single('book-pic'), updateBook);
+router.get('/edit/:id', [checkCPAmiddleware.checkcookie,
+checkCPAmiddleware.checkpermission], getEditForm);
 
 module.exports = router;
