@@ -1,11 +1,17 @@
-const { addBook } = require("../service/CRUD.Service");
+const { addBook, getBookInventory, getBookInfor, updateBookInformation } = require("../service/CRUD.Service");
 
 const personal = (req, res) => {
+
     res.render('personal.ejs', { userData: getUserData(req) });
 }
 
-const getInventory = (req, res) => {
-    return res.render('inventory.ejs', { userData: getUserData(req) });
+const getInventory = async (req, res) => {
+    const bookInventory = await getBookInventory();
+
+    return res.render('inventory.ejs', {
+        userData: getUserData(req),
+        book: bookInventory
+    });
 }
 
 const getFormAddBook = (req, res) => {
@@ -15,6 +21,16 @@ const getFormAddBook = (req, res) => {
 
 const getSettingForm = (req, res) => {
     return res.render('setting.ejs', { userData: getUserData(req) });
+}
+
+const getEditForm = async (req, res) => {
+    const bookId = req.params.id;
+    const infor = await getBookInfor(bookId);
+
+    return res.render('edit.ejs', {
+        userData: getUserData(req),
+        information: infor
+    });
 }
 
 const getListBookRented = (req, res) => {
@@ -38,11 +54,27 @@ const addNewBook = async (req, res) => {
     else if (!req.file) {
         return res.send('Please select an image to upload');
     }
-    addBook();
-    res.send('hello');
+    addBook(req);
+
+    res.send('Add book succesful');
+}
+
+const updateBook = async (req, res) => {
+    let haveimage = false; //default true
+
+    if (req.fileValidationError) {
+        return res.send(req.fileValidationError);
+    }
+    else if (req.file) {
+        haveimage = true; //user edit book's information have uploaded image
+    }
+
+    await updateBookInformation(req, haveimage);
+
+    res.redirect('/inventory');
 }
 
 module.exports = {
     personal, getInventory, getFormAddBook, getSettingForm,
-    getListBookRented, addNewBook
+    getListBookRented, addNewBook, getEditForm, updateBook
 }
