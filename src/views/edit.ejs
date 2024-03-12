@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/personal.css">
+    <link rel="stylesheet" href="/css/addbook.css">
+    <title>Edit</title>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <header>
+            <h1> Hello <span>
+                    <%= userData.username %>
+                </span></h1>
+        </header>
+        <nav>
+            <ul>
+                <div class="selection">
+                    <img class="img-icon" src="/icon/addbook.png">
+                    <li><a href="/addbook">Add book</a></li>
+                </div>
+                <div class="selection">
+                    <img class="img-icon" src="/icon/listbook.png">
+                    <% if(userData.roles==='admin' ) {%>
+                        <li><a href="/listbook/2">Manage Account</a></li>
+                        <%} else {%>
+                            <li><a href="/listbook/2">List book rented</a></li>
+                            <%}%>
+                </div>
+                <div class="selection">
+                    <img class="img-icon" src="/icon/setting.png">
+                    <li><a href="/setting">Settings</a></li>
+                </div>
+                <div class="selection" style="background-color: #2c3e50;">
+                    <img class="img-icon" src="/icon/inventory.png">
+                    <li><a href="/inventory">Inventory</a></li>
+                </div>
+                <div class="selection">
+                    <img class="img-icon" src="/icon/leave.png">
+                    <li><a href="/">Back</a></li>
+                </div>
+            </ul>
+        </nav>
+        <main class="content">
+            <section class="overview">
+                <form class="form-add-book" action="/update-book" method="POST" enctype="multipart/form-data">
+                    <label for="bookId">Id:</label>
+                    <input type="text" id="id" name="bookId" value="<%= information.bookId %>" readonly>
+
+                    <label for="bookName">Book Name:</label>
+                    <input type="text" id="bookName" name="bookName" value="<%= information.name %>" required>
+
+                    <label for="author">Author:</label>
+                    <input type="text" id="author" name="author" value="<%= information.author %>" required>
+
+                    <label for="priceRent">Price Rent:</label>
+                    <input type="number" id="priceRent" name="priceRent" value="<%= information.price %>" required>
+
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" id="quantity" name="quantity" value="<%= information.quantity %>" required>
+
+                    <label for="category">Category (ID):</label>
+                    <input type="number" id="category" name="category" value="<%= information.idcategory %>" required>
+
+                    <label>Image</label>
+                    <input type="file" name="book-pic">
+                    <label for="description">Description:</label>
+                    <textarea id="description" name="description" rows="4"
+                        required><%= information.description %></textarea>
+
+                    <button type="submit">Update</button>
+                </form>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>
