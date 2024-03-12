@@ -1,13 +1,19 @@
+const { getBookInventory } = require("../service/CRUD.Service");
 const { authen } = require("../service/authentication.service");
 
-const getHomePage = (req, res) => {
+const getHomePage = async (req, res) => {
     let userData = req.cookies.userData;
 
     if (userData === undefined) {
         userData = JSON.stringify({});
     }
 
-    res.render('HomePage.ejs', { userData: JSON.parse(userData) });
+    const bookInventory = await getBookInventory();
+
+    return res.render('HomePage.ejs', {
+        userData: JSON.parse(userData),
+        book: bookInventory
+    });
 }
 
 const postLogin = async (req, res) => {
@@ -19,7 +25,7 @@ const postLogin = async (req, res) => {
         res.send('Username or passsword is incorrect');
     } else {
         res.cookie('userData', JSON.stringify(user), {
-            maxAge: 5 * 60 * 1000, //cookie expired
+            maxAge: 20 * 60 * 1000, //cookie expired
             httpOnly: true,
             secure: false,
             sameSites: 'strict'
