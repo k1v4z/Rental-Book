@@ -82,23 +82,37 @@
                         </ul>
                     </ul>
                     <%} else{%>
-                        <h2>List user</h2>
+                        <h1>User are renting book</h1>
                         <ul class="user-list">
                             <table id="customers">
                                 <tr>
-                                    <th>Number</th>
-                                    <th>username</th>
-                                    <th>Bookid rent</th>
-                                    <th>Book number return yet</th>
+                                    <th>User Id</th>
+                                    <th>Username</th>
+                                    <th>Book</th>
                                 </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>nhatthaoprime</td>
-                                    <td>1,2,3,4,5,6</td>
-                                    <td>
-                                        1
-                                    </td>
-                                </tr>
+                                <% userRentArr.forEach((item)=> { %>
+                                    <tr>
+                                        <td>
+                                            <%=item.id%>
+                                        </td>
+                                        <td>
+                                            <a href="/rent/<%=item.id%>">
+                                                <%=item.username%>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <%item.Rentals.forEach((rentItem)=>{%>
+                                                <%rentItem.BookRenteds.forEach((book,index)=>{%>
+                                                    <%if(index===rentItem.BookRenteds.length-1){%>
+                                                        <%=book.Book.name%>
+                                                            <%} else {%>
+                                                                <%=book.Book.name%>,
+                                                                    <%}%>
+                                                                        <%})%>
+                                                                            <%})%>
+                                        </td>
+                                    </tr>
+                                    <%})%>
                             </table>
                         </ul>
                         <% }%>
