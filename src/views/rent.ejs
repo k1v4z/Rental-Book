@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/personal.css">
+    <link rel="stylesheet" href="/css/rented.css">
+    <title>Rented</title>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <header>
+            <h1> Hello <span>
+                    <%= userData.username %>
+                </span></h1>
+        </header>
+        <nav>
+            <ul>
+                <div class="selection">
+                    <img class="img-icon" src="/icon/addbook.png">
+                    <li><a href="/addbook">Add book</a></li>
+                </div>
+                <div class="selection" style="background-color: #2c3e50;">
+                    <img class="img-icon" src="/icon/listbook.png">
+                    <% if(userData.roles==='admin' ) {%>
+                        <li><a href="/listbook/2">Manage Account</a></li>
+                        <%} else {%>
+                            <li><a href="/listbook/2">List book rented</a></li>
+                            <%}%>
+                </div>
+                <div class="selection">
+                    <img class="img-icon" src="/icon/setting.png">
+                    <li><a href="/setting">Settings</a></li>
+                </div>
+                <% if(userData.roles==='admin' ) {%>
+                    <div class="selection">
+                        <img class="img-icon" src="/icon/category.png">
+                        <li><a href="/manage-category">Category</a></li>
+                    </div>
+                    <%}%>
+                        <div class="selection">
+                            <img class=" img-icon" src="/icon/inventory.png">
+                            <li><a href="/inventory">Inventory</a></li>
+                        </div>
+                        <div class="selection">
+                            <img class="img-icon" src="/icon/leave.png">
+                            <li><a href="/">Back</a></li>
+                        </div>
+            </ul>
+        </nav>
+        <main class="content">
+            <section class="overview">
+                <h2>
+                    <%= userRentObject.username %>
+                </h2>
+                <ul class="inventorylist" id="inventoryList">
+                    <%userRentObject.Rentals.forEach((rent)=>{%>
+                        <ul class="rent-container">
+                            <h1 class="rent-id">
+                                RentId: <%=rent.rentid%>
+                            </h1>
+                            <%rent.BookRenteds.forEach((book)=>{%>
+                                <li class="book-item">
+                                    <img class="book-image" src="/product/<%=book.Book.image%>" alt="Book Image">
+                                    <div class="book-details">
+                                        <h3>
+                                            <%=book.Book.name%>
+                                        </h3>
+                                        <p>Author: <%=book.Book.author%>
+                                        </p>
+                                        <p>Rent date: <%=book.rentdate%>
+                                        </p>
+                                        <p>Return date: <%=book.returndate%>
+                                        </p>
+                                        <p class="book-price">Price: <%=book.Book.price%> VND </p>
+                                    </div>
+                                </li>
+                                <%})%>
+                                    <div class="total">Total: <span class="total-span">
+                                            <%=rent.payment%> VND
+                                        </span>
+                                    </div>
+                        </ul>
+                        <%})%>
+                </ul>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>
