@@ -1,6 +1,8 @@
 const User = require('../model/User');
 const Book = require('../model/Book');
 const Category = require('../model/Category');
+const BookRented = require('../model/BookRented');
+const Rental = require('../model/Rental');
 
 const checkUserExist = async (username) => {
 
@@ -223,9 +225,32 @@ const getListCategory = async () => {
     return categories;
 }
 
-const getAllUsers = () => {
+const getUserRentBook = async () => {
+    const user = await User.findAll({
+        attributes: ['username', 'id'],
+        where: { roles: 'user' },
+        include: [
+            {
+                model: Rental,
+                attributes: ['rentid'],
+                include: [
+                    {
+                        model: BookRented,
+                        attributes: ['rentid'],
+                        where: { isreturn: false },
+                        include: [{
+                            model: Book,
+                            attributes: ['name']
+                        }]
+                    }
+                ]
+            }
+        ]
+    });
 
+    return JSON.parse(JSON.stringify(user));
 }
+
 
 const getDetail = async (id) => {
     const book = await Book.findOne({
@@ -235,6 +260,32 @@ const getDetail = async (id) => {
     });
 
     return book.dataValues;
+}
+
+const getRentById = async (userid) => {
+    const rent = await User.findOne({
+        attributes: ['username', 'id'],
+        where: { id: userid },
+        include: [
+            {
+                model: Rental,
+                attributes: ['rentid', 'payment'],
+                include: [
+                    {
+                        model: BookRented,
+                        attributes: ['rentid', 'rentdate', 'returndate'],
+                        where: { isreturn: false },
+                        include: [{
+                            model: Book,
+                            attributes: ['name', 'author', 'image', 'price']
+                        }]
+                    }
+                ]
+            }
+        ]
+    });
+
+    return JSON.parse(JSON.stringify(rent));
 }
 
 const addCategory = async (name) => {
@@ -265,5 +316,5 @@ module.exports = {
     signUp, login, getIdUser, addBook, getBookInventory,
     increaseQuantityBook, decreaseQuantityBook, deleteBook,
     getBookInfor, updateBookInformation, getListCategory, addCategory,
-    getAllUsers, getDetail
+    getDetail, getUserRentBook, getRentById
 }
