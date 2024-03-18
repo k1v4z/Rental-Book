@@ -1,4 +1,4 @@
-const { addBook, getBookInventory, getBookInfor, updateBookInformation, getListCategory, addCategory } = require("../service/CRUD.Service");
+const { addBook, getBookInventory, getBookInfor, updateBookInformation, getListCategory, addCategory, getUserRentBook, getRentById } = require("../service/CRUD.Service");
 
 const personal = (req, res) => {
 
@@ -42,9 +42,12 @@ const category = async (req, res) => {
     });
 }
 
-const getListBookRented = (req, res) => {
+const getListBookRented = async (req, res) => {
+    const listUser = await getUserRentBook();
+
     return res.render('listbookrented.ejs', {
-        userData: getUserData(req)
+        userData: getUserData(req),
+        userRentArr: listUser
     });
 }
 
@@ -58,10 +61,6 @@ const getUserData = (req) => {
     return JSON.parse(userData);
 }
 
-const getAllUser = (req, res) => {
-    
-}
-
 const addNewBook = async (req, res) => {
     if (req.fileValidationError) {
         return res.send(req.fileValidationError);
@@ -72,6 +71,17 @@ const addNewBook = async (req, res) => {
     addBook(req);
 
     res.send('Add book succesful');
+}
+
+//this function show which book is user rent?
+const getRent = async (req, res) => {
+    const id = req.params.id;
+    const rent = await getRentById(id);
+    
+    return res.render('rent.ejs', {
+        userData: getUserData(req),
+        userRentObject: rent
+    });
 }
 
 const addNewCategory = async (req, res) => {
@@ -99,5 +109,5 @@ const updateBook = async (req, res) => {
 module.exports = {
     personal, getInventory, getFormAddBook, getSettingForm,
     getListBookRented, addNewBook, getEditForm, updateBook,
-    category, addNewCategory
+    category, addNewCategory, getRent
 }
