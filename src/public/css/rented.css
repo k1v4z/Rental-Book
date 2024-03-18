@@ -123,3 +123,13 @@ nav {
   background-color: #04AA6D;
   color: white;
 }
+
+.total{
+    margin-left: 10px;
+    padding-bottom: 10px;
+    font-weight: bold;
+}
+.total-span{
+    color: green;
+    font-weight: bold;
+}
