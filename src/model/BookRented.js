@@ -14,7 +14,8 @@ const BookRented = sequelize.define('BookRenteds', {
     bookid: DataTypes.INTEGER,
     rentdate: DataTypes.DATE,
     returndate: DataTypes.DATE,
-    isreturn: DataTypes.BOOLEAN
+    isreturn: DataTypes.BOOLEAN,
+    delay: DataTypes.INTEGER
 });
 
 //define association
