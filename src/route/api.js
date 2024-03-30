@@ -1,5 +1,5 @@
 const express = require('express');
-const { apisignup, apilogin, apigetIdUser, apiCheckPermission, apiIncreaseQuantity, apiDecreaseQuantity, apiDeleteBook } = require('../controller/ApiController');
+const { apisignup, apilogin, apigetIdUser, apiCheckPermission, apiIncreaseQuantity, apiDecreaseQuantity, apiDeleteBook, apiReturnBook } = require('../controller/ApiController');
 
 const { checkValid, checktypeOfQueryId } = require('../middleware/valid.middleware');
 const checkCPAmiddleware = require('../middleware/cap.middleware');
@@ -15,7 +15,9 @@ const initApiRoute = (app) => {
 
     router.patch('/increase-amount', checktypeOfQueryId, apiIncreaseQuantity);
     router.patch('/decrease-amount', checktypeOfQueryId, apiDecreaseQuantity);
-    router.patch('/delete-book',checktypeOfQueryId, apiDeleteBook);
+    router.patch('/delete-book', checktypeOfQueryId, apiDeleteBook);
+
+    router.patch('/return-book', apiReturnBook);
 
     return app.use('/api/v1/', router);
 }
