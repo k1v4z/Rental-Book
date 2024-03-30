@@ -74,12 +74,33 @@
                                         </p>
                                         <p>Return date: <%=book.returndate%>
                                         </p>
-                                        <p class="book-price">Price: <%=book.Book.price%> VND </p>
+                                        <p>
+                                            <%if(book.delay==1){%>
+                                                Delay: <%= book.delay%> day
+                                                    <%}else if(book.delay==0){%>
+                                                        No delay
+                                                        <%}else{%>
+                                                            Delay: <%= book.delay%> days
+                                                                <%}%>
+                                        </p>
+                                        <p class="book-price">Price: <%=book.Book.price%> VND (+<%=Number(book.delay) *
+                                                    10%>% ~ <%=Number(book.Book.price*book.delay) * 0.1%> VND ) </p>
                                     </div>
+                                    <% if(book.isreturn) {%>
+                                        <div class="is-return">Returned</div>
+                                        <%} else{%>
+                                            <button class="btn-return" data-rentid="<%=rent.rentid%>"
+                                                data-bookid="<%=book.Book.bookid%>">Return</button>
+                                            <%}%>
                                 </li>
                                 <%})%>
                                     <div class="total">Total: <span class="total-span">
                                             <%=rent.payment%> VND
+                                        </span>
+                                    </div>
+                                    <div class="total">Paid remaining:
+                                        <span class="total-span">
+                                            <%=rent.paidRemaining%> VND
                                         </span>
                                     </div>
                         </ul>
@@ -89,5 +110,6 @@
         </main>
     </div>
 </body>
+<script src="/js/handleReturn.js"></script>
 
 </html>
