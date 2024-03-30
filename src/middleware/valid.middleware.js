@@ -26,7 +26,7 @@ const checktypeOfQueryId = (req, res, next) => {
     //If id book is a letter send a message else go to controller
     if (bookId.match(/[a-z]/i)) {
         return res.status(400).json({
-            message: 'bookId is not valid'
+            message: 'Input is not valid'
         })
     }
     next();
