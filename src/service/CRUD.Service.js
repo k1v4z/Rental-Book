@@ -4,6 +4,8 @@ const Category = require('../model/Category');
 const BookRented = require('../model/BookRented');
 const Rental = require('../model/Rental');
 
+const { calculateMoneyPay, paidRemaining, handlePayment } = require('./Calculate.service');
+
 const checkUserExist = async (username) => {
 
     const user = await User.findOne({
@@ -273,11 +275,10 @@ const getRentById = async (userid) => {
                 include: [
                     {
                         model: BookRented,
-                        attributes: ['rentid', 'rentdate', 'returndate'],
-                        where: { isreturn: false },
+                        attributes: ['rentid', 'rentdate', 'returndate', 'isreturn'],
                         include: [{
                             model: Book,
-                            attributes: ['name', 'author', 'image', 'price']
+                            attributes: ['bookid','name', 'author', 'image', 'price']
                         }]
                     }
                 ]
@@ -285,7 +286,9 @@ const getRentById = async (userid) => {
         ]
     });
 
-    return JSON.parse(JSON.stringify(rent));
+    const rentJSON = JSON.parse(JSON.stringify(rent));
+    //console.table(JSON.stringify(rentJSON));
+    return await handlePayment(rentJSON);
 }
 
 const addCategory = async (name) => {
