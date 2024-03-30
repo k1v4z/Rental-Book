@@ -1,5 +1,6 @@
 const { signUp, login, getIdUser, increaseQuantityBook,
     decreaseQuantityBook, deleteBook } = require("../service/CRUD.Service");
+const { returnBook } = require("../service/Return.service");
 
 const apisignup = async (req, res) => {
     const { status, message } = await signUp(req);
@@ -82,7 +83,17 @@ const apiDeleteBook = async (req, res) => {
     })
 }
 
+const apiReturnBook = async (req, res) => {
+    const { rentid, bookid } = req.query;
+    await returnBook(rentid, bookid);
+
+    return res.status(200).json({
+        message: 'Book have been returned'
+    })
+}
+
 module.exports = {
     apisignup, apilogin, apigetIdUser, apiCheckPermission,
-    apiIncreaseQuantity, apiDecreaseQuantity, apiDeleteBook
+    apiIncreaseQuantity, apiDecreaseQuantity, apiDeleteBook,
+    apiReturnBook
 }
