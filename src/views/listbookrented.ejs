@@ -103,7 +103,7 @@
                                         <td>
                                             <%item.Rentals.forEach((rentItem)=>{%>
                                                 <%rentItem.BookRenteds.forEach((book,index)=>{%>
-                                                    <%if(index===rentItem.BookRenteds.length-1){%>
+                                                    <%if(index==rentItem.BookRenteds.length){%>
                                                         <%=book.Book.name%>
                                                             <%} else {%>
                                                                 <%=book.Book.name%>,
