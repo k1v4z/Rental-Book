@@ -7,7 +7,7 @@ const { checkCookie } = require('../middleware/cookie.middleware');
 const checkCPAmiddleware = require('../middleware/cap.middleware');
 const { personal, getFormAddBook, getInventory, getSettingForm,
     getListBookRented, addNewBook, getEditForm, updateBook,
-    category, addNewCategory, getRent } = require('../controller/PersonalController');
+    category, addNewCategory, getRent, paymentRequest } = require('../controller/PersonalController');
 const router = express.Router();
 const { upload } = require('../config/multer');
 
@@ -29,7 +29,8 @@ router.get('/addbook', [checkCPAmiddleware.checkcookie,
 checkCPAmiddleware.checkpermission], getFormAddBook);
 router.get('/inventory', [checkCPAmiddleware.checkcookie,
 checkCPAmiddleware.checkpermission], getInventory);
-router.get('/setting', checkCookie, getSettingForm);
+router.get('/setting/:username', checkCookie, getSettingForm);
+router.get('/manage-rental', checkCookie, getListBookRented);
 router.get('/listbook/:id', checkCookie, getListBookRented);
 router.post('/addnewbook', [checkCPAmiddleware.checkcookie,
 checkCPAmiddleware.checkpermission, upload.single('book-pic')], addNewBook);
@@ -42,6 +43,9 @@ checkCPAmiddleware.checkpermission], category);
 router.post('/addnewcategory', addNewCategory);
 
 router.get('/rent/:id', [checkCPAmiddleware.checkcookie,
-checkCPAmiddleware.checkpermission], getRent)
+checkCPAmiddleware.checkpermission], getRent);
+
+router.get('/payment-request', [checkCPAmiddleware.checkcookie,
+checkCPAmiddleware.checkpermission], paymentRequest);
 
 module.exports = router;

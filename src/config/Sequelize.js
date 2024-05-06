@@ -14,7 +14,8 @@ const sequelize = new Sequelize(db_name, db_user, db_password, {
     port: Number(db_port),
     define: {
         timestamps: false
-    }
+    },
+    timezone: '+07:00' //change timezone to Viet Nam
 });
 
 module.exports = {

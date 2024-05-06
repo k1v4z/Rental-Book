@@ -1,5 +1,7 @@
 const { signUp, login, getIdUser, increaseQuantityBook,
     decreaseQuantityBook, deleteBook } = require("../service/CRUD.Service");
+const { sendPaymentRequest, acceptPaymentRequest, rejectPaymentRequest } = require("../service/PaymenRequest.service");
+const { recharge } = require("../service/Payment.service");
 const { returnBook } = require("../service/Return.service");
 
 const apisignup = async (req, res) => {
@@ -92,8 +94,68 @@ const apiReturnBook = async (req, res) => {
     })
 }
 
+const apiSendPaymentRequest = async (req, res) => {
+    const { amount } = req.query;
+    const userid = await getIdUser(req);
+    const request = await sendPaymentRequest(amount, userid.id);
+    if (request) {
+        return res.status(200).json({
+            message: "Request successful"
+        });
+    }
+
+    return res.status(400).json({
+        error: "Bad request"
+    })
+}
+
+const apiAcceptPaymentRequest = async (req, res) => {
+    const { id } = req.query;
+    const accept = await acceptPaymentRequest(id);
+    if (accept) {
+        return res.status(200).json({
+            message: "Successful"
+        });
+    }
+
+    return res.status(400).json({
+        error: "Bad request"
+    });
+}
+
+const apiRejectRequest = async (req, res) => {
+    const { id } = req.query;
+    const reject = await rejectPaymentRequest(id);
+    
+    if (reject) {
+        return res.status(200).json({
+            message: "Successful"
+        });
+    }
+
+    return res.status(400).json({
+        error: "Bad request"
+    });
+}
+
+const apiRecharge = async (req, res) => {
+    const { id, amount } = req.query;
+    const rechargeSuccess = await recharge(id, amount);
+
+    if (rechargeSuccess) {
+        return res.status(200).json({
+            message: "Recharge successful"
+        })
+    }
+
+    return res.status(400).json({
+        error: 'Bad request'
+    })
+}
+
 module.exports = {
     apisignup, apilogin, apigetIdUser, apiCheckPermission,
     apiIncreaseQuantity, apiDecreaseQuantity, apiDeleteBook,
-    apiReturnBook
+    apiReturnBook, apiSendPaymentRequest, apiAcceptPaymentRequest,
+    apiRecharge, apiRejectRequest
 }

@@ -1,0 +1,67 @@
+/* You can define your styles here */
+.payment-requests {
+    background-color: wheat;
+    margin: 20px;
+    margin-left: 400px;
+    width: 400px;
+    margin-top: 50px;
+    box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.4);    
+}
+
+.payment-requests h2 {
+    color: #333;
+}
+
+.request {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.request-info {
+    display: flex;
+    align-items: center;
+}
+
+.request-info img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.details p {
+    margin: 5px 0;
+}
+
+.action-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.action-buttons button {
+    padding: 8px;
+    margin-right: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.approve-button img,
+.reject-button img {
+    width: 30px;
+    height: 30px;
+}
+
+.approve-button {
+    background-color: #4CAF50;
+    border-radius: 5px;
+}
+
+.reject-button {
+    background-color: #f44336;
+    border-radius: 5px;
+}

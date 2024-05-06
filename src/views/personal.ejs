@@ -24,14 +24,14 @@
                 <div class="selection">
                     <img class="img-icon" src="/icon/listbook.png">
                     <% if(userData.roles==='admin' ) {%>
-                        <li><a href="/listbook/2">Manage Account</a></li>
+                        <li><a href="/manage-rental">Manage Account</a></li>
                         <%} else {%>
-                            <li><a href="/listbook/2">List book rented</a></li>
+                            <li><a href="/listbook/<%=userData.id%>">List book rented</a></li>
                             <%}%>
                 </div>
                 <div class="selection" onclick="window.location.href='/settings'">
                     <img class="img-icon" src="/icon/setting.png">
-                    <li><a href="/setting">Settings</a></li>
+                    <li><a href="/setting/<%=userData.username%>">Settings</a></li>
                 </div>
                 <% if(userData.roles==='admin' ) {%>
                     <div class="selection">

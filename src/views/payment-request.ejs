@@ -5,20 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/personal.css">
-    <link rel="stylesheet" href="/css/addbook.css">
+    <link rel="stylesheet" href="/css/setting.css">
+    <link rel="stylesheet" href="/css/payment-request.css">
     <title>Personal</title>
 </head>
 
 <body>
     <div class="dashboard-container">
         <header>
-            <h1> Hello <span>
+            <h1> Hello <span class="username">
                     <%= userData.username %>
                 </span></h1>
         </header>
         <nav>
             <ul>
-                <div class="selection" style="background-color: #2c3e50;">
+                <div class="selection">
                     <img class="img-icon" src="/icon/addbook.png">
                     <li><a href="/addbook">Add book</a></li>
                 </div>
@@ -39,7 +40,7 @@
                         <img class="img-icon" src="/icon/category.png">
                         <li><a href="/manage-category">Category</a></li>
                     </div>
-                    <div class="selection">
+                    <div class="selection" style="background-color: #2c3e50;">
                         <img class="img-icon" src="/icon/payment.png">
                         <li><a href="/payment-request">Payment Request</a></li>
                     </div>
@@ -48,41 +49,46 @@
                             <img class="img-icon" src="/icon/inventory.png">
                             <li><a href="/inventory">Inventory</a></li>
                         </div>
+
                         <div class="selection">
                             <img class="img-icon" src="/icon/leave.png">
                             <li><a href="/">Back</a></li>
                         </div>
+
             </ul>
         </nav>
-        <main class="content">
-            <section class="overview">
-                <form class="form-add-book" id="addBookForm" action="/addnewbook" method="POST"
-                    enctype="multipart/form-data">
-                    <label for="bookName">Book Name:</label>
-                    <input type="text" id="bookName" name="bookName" required>
-
-                    <label for="author">Author:</label>
-                    <input type="text" id="author" name="author" required>
-
-                    <label for="priceRent">Price Rent:</label>
-                    <input type="number" id="priceRent" name="priceRent" required>
-
-                    <label for="quantity">Quantity:</label>
-                    <input type="number" id="quantity" name="quantity" required>
-
-                    <label for="category">Category (ID):</label>
-                    <input type="number" id="category" name="category" required>
-
-                    <label>Image</label>
-                    <input type="file" name="book-pic">
-                    <label for="description">Description:</label>
-                    <textarea id="description" name="description" rows="4" required></textarea>
-
-                    <button type="submit">Add Book</button>
-                </form>
-            </section>
+        <main>
+            <div class="payment-requests">
+                <h2>Payment Requests</h2>
+                <%if(paymentRequest.length==0) {%>
+                    <p>You don't have any payment request</p>
+                    <%} else{%>
+                        <%paymentRequest.forEach((request)=>{%>
+                            <div class="request">
+                                <div class="request-info">
+                                    <div class="details">
+                                        <p><strong>User name: <%=request.User.username%></strong></p>
+                                        <p class="amount-<%=request.id%>"><strong>Amount:</strong>
+                                            <%=request.amount%> VND
+                                        </p>
+                                        <p><strong>At: </strong>
+                                            <%=request.requestAt%>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="action-buttons">
+                                    <button class="approve-button" data-id="<%=request.id%>"><img
+                                            src="/icon/icon-approve.png" alt="Approve Icon"></button>
+                                    <button class="reject-button" data-id="<%=request.id%>"><img
+                                            src="/icon/icon-reject.png" alt="Reject Icon"></button>
+                                </div>
+                            </div>
+                    <%})%>
+                <%}%>
+            </div>
         </main>
     </div>
 </body>
+<script src="/js/handlePaymentRequest.js"></script>
 
 </html>

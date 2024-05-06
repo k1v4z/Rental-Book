@@ -1,5 +1,7 @@
 const express = require('express');
-const { apisignup, apilogin, apigetIdUser, apiCheckPermission, apiIncreaseQuantity, apiDecreaseQuantity, apiDeleteBook, apiReturnBook } = require('../controller/ApiController');
+const { apisignup, apilogin, apigetIdUser, apiCheckPermission,
+    apiIncreaseQuantity, apiDecreaseQuantity, apiDeleteBook,
+    apiReturnBook, apiSendPaymentRequest, apiAcceptPaymentRequest, apiRecharge, apiRejectRequest } = require('../controller/ApiController');
 
 const { checkValid, checktypeOfQueryId } = require('../middleware/valid.middleware');
 const checkCPAmiddleware = require('../middleware/cap.middleware');
@@ -18,6 +20,10 @@ const initApiRoute = (app) => {
     router.patch('/delete-book', checktypeOfQueryId, apiDeleteBook);
 
     router.patch('/return-book', apiReturnBook);
+    router.post('/send-payment-request', apiSendPaymentRequest);
+    router.patch('/accept-request', apiAcceptPaymentRequest);
+    router.patch('/reject-request', apiRejectRequest);
+    router.patch('/recharge', apiRecharge);
 
     return app.use('/api/v1/', router);
 }

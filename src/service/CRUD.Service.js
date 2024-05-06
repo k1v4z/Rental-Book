@@ -4,7 +4,8 @@ const Category = require('../model/Category');
 const BookRented = require('../model/BookRented');
 const Rental = require('../model/Rental');
 
-const { calculateMoneyPay, paidRemaining, handlePayment } = require('./Calculate.service');
+const { handlePayment } = require('./Calculate.service');
+const { checkCategoryExist } = require('../helper/checkexist.helper');
 
 const checkUserExist = async (username) => {
 
@@ -158,18 +159,23 @@ const addBook = async (req) => {
     const { bookName, author, description, priceRent, quantity, category } = req.body;
 
     const image = req.file.filename;
+    const categoryIsExist = await checkCategoryExist(category);
+    if (categoryIsExist) {
+        await Book.create({
+            name: bookName,
+            author: author,
+            description: description,
+            price: priceRent,
+            image: image,
+            idcategory: category,
+            isdeleted: false,
+            quantity: quantity
+        });
 
-    const book = await Book.create({
-        name: bookName,
-        author: author,
-        description: description,
-        price: priceRent,
-        image: image,
-        idcategory: category,
-        isdeleted: false,
-        quantity: quantity
-    });
+        return true;
+    }
 
+    return false;
 }
 
 const updateBookInformation = async (req, haveimage) => {
@@ -180,7 +186,7 @@ const updateBookInformation = async (req, haveimage) => {
     if (haveimage) {
         var fs = require('fs');
         var filepath = `D:/RentalBook/src/public/product/${image}`; //delete previous file
-
+        //if you save image product in other location, please change filepath
         fs.unlink(filepath, (err) => {
             if (err) return console.log(err);
             console.log('file deleted successfully');
@@ -278,7 +284,7 @@ const getRentById = async (userid) => {
                         attributes: ['rentid', 'rentdate', 'returndate', 'isreturn'],
                         include: [{
                             model: Book,
-                            attributes: ['bookid','name', 'author', 'image', 'price']
+                            attributes: ['bookid', 'name', 'author', 'image', 'price']
                         }]
                     }
                 ]
@@ -289,6 +295,22 @@ const getRentById = async (userid) => {
     const rentJSON = JSON.parse(JSON.stringify(rent));
     //console.table(JSON.stringify(rentJSON));
     return await handlePayment(rentJSON);
+}
+
+const getAmount = async (username) => {
+    const amount = await User.findOne({
+        where: {
+            username: username
+        }
+    })
+        .then(response => JSON.stringify(response))
+        .then((respondJSON) => {
+            const am = JSON.parse(respondJSON); //am is amount, avoid duplicate variable
+            return am.amount;
+        })
+        .catch(error => console.log(error));
+
+    return amount;
 }
 
 const addCategory = async (name) => {
@@ -319,5 +341,5 @@ module.exports = {
     signUp, login, getIdUser, addBook, getBookInventory,
     increaseQuantityBook, decreaseQuantityBook, deleteBook,
     getBookInfor, updateBookInformation, getListCategory, addCategory,
-    getDetail, getUserRentBook, getRentById
+    getDetail, getUserRentBook, getRentById, getAmount
 }
